@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 // request api with custom hook
-const useApi = (requestConfig, applyData ) => {
+const useApi = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
   
-    const sendRequest = async () => {
+    const sendRequest = useCallback(async (requestConfig, applyData) => {
       setIsLoading(true);
       setError(null);
       try {
@@ -27,7 +27,7 @@ const useApi = (requestConfig, applyData ) => {
         setError(err.message || 'Something went wrong!');
       }
       setIsLoading(false);
-    };
+    }), [];
   
     return {
         isLoading,
