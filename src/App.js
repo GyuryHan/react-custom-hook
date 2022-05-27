@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 
-import Tasks from './components/Tasks/Tasks';
-import NewTask from './components/NewTask/NewTask';
-import useApi from './hooks/use-api';
+import Tasks from "./components/Tasks/Tasks";
+import NewTask from "./components/NewTask/NewTask";
+import useApi from "./hooks/use-api";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -24,7 +24,6 @@ function App() {
 
   //     const data = await response.json();
 
-
   //   } catch (err) {
   //     setError(err.message || 'Something went wrong!');
   //   }
@@ -34,17 +33,17 @@ function App() {
   useEffect(() => {
     const transformTasks = useCallback((taskObj) => {
       const loadedTasks = [];
-  
+
       for (const taskKey in taskObj) {
         loadedTasks.push({ id: taskKey, text: taskObj[taskKey].text });
       }
-  
+
       setTasks(loadedTasks);
-    },[]);
+    }, []);
     fetchTasks(
-      {url: 'https://react-http-6b4a6.firebaseio.com/tasks.json'}, 
-      transformTasks)
-      ;
+      { url: "https://react-http-6b4a6.firebaseio.com/tasks.json" },
+      transformTasks
+    );
   }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
